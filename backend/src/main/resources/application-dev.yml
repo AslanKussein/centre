@@ -1,0 +1,29 @@
+server:
+  http2:
+    enabled: true
+  error:
+    include-stacktrace: always
+    include-message: always
+  session:
+    tracking-modes: cookie
+  servlet:
+    context-path: /centre
+    encoding:
+      force-response: true
+      charset: UTF-8
+  port: 9090
+spring.jpa:
+  database: oracle
+  show-sql: false
+  open-in-view: false
+spring.datasource:
+  platform: oracle
+  driverClassName: oracle.jdbc.OracleDriver
+  url: jdbc:oracle:thin:@//172.16.17.65:1521/PV10
+  username: solidary
+  password: A123456a
+auth:
+  host: http://172.16.17.86:8080/sso
+  permissions: /api/v1/ru/adm-core/my/permissions/
+  roles: /api/v1/ru/adm-core/my/roles/
+  valid: /open-api/auth/validateToken

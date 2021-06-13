@@ -1,0 +1,48 @@
+{
+  "header": {
+    "logout": "Выход",
+    "systems": "Системы",
+    "profile": "Профиль",
+    "mainTitle": "Система единой авторизации",
+    "requirement": "Потребность",
+    "demandCalculation": "Расчет потребности",
+    "calculationPregnancy": "Расчет по беременности и родам",
+    "newPeriod": "Открытие нового периода",
+    "paymentDays": "Дни выплаты",
+    "payments": "Платежи",
+    "formationPayments": "Формирование платежей",
+    "form7d": "Форма 7Д",
+    "reports": "Отчеты",
+    "changePass": "Смена пароля",
+    "fl": "ГБД ФЛ"
+  },
+  "error": {
+    "error": "Ошибка",
+    "notCorrectLogin": "Не корректные данные для входа"
+  },
+  "paymentDays": {
+    "title": "Ведение дней выплат",
+    "month": "Месяц",
+    "date": "Дата",
+    "begin": "Начало",
+    "end": "Конец",
+    "status": "Статус",
+    "action": "Деиствия",
+    "actionF": "Блокировка/Разблокировка дней выплаты",
+    "newPayDay": "Новый день выплаты",
+    "dropPayDay": "Удалить день выплаты",
+    "changeLevel": "Изменить этапы",
+    "sendEnpf": "Отправить график в ЕНПФ"
+  },
+  "demandCalc": {
+    "code": "Код",
+    "name": "Наименование",
+    "lock": "Блокировка",
+    "calc": "Расчёт"
+  },
+  "data": {
+    "availableSystems": "Доступные системы",
+    "settings": "Настройки",
+    "dictionary": "Справочники"
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "header": {
+    "logout": "Шығу",
+    "systems": "Жүйелер",
+    "profile": "Профиль",
+    "mainTitle": "Бірыңғай авторизация жүйесі",
+    "requirement": "Қажет",
+    "demandCalculation": "Сұранысты есептеу",
+    "calculationPregnancy": "Жүктілік пен босануға арналған есеп",
+    "newPeriod": "Жаңа кезеңнің ашылуы",
+    "paymentDays": "Төлем күндері",
+    "payments": "Төлемдер",
+    "formationPayments": "Төлемдерді қалыптастыру",
+    "form7d": "7Д Формасы",
+    "reports": "Есептер",
+    "changePass": "Парольді өзгерту",
+    "fl": "ЖТ МДҚ"
+  },
+  "error": {
+    "error": "Қате",
+    "notCorrectLogin": "Кіру мәліметтері жарамсыз"
+  },
+  "paymentDays": {
+    "title": "Төлем күндерін сақтау",
+    "month": "Ай",
+    "date": "Күн",
+    "begin": "Басы",
+    "end": "Соңы",
+    "status": "Статус",
+    "action": "Әрекеттер",
+    "actionF": "Төлем күндерін құлыптау / құлпын ашу",
+    "newPayDay": "Жаңа төлем күні",
+    "dropPayDay": "Төлем күнін жою",
+    "changeLevel": "Кезеңдерді өзгерту",
+    "sendEnpf": "Отправить график в ЕНПФ"
+  },
+  "demandCalc": {
+    "code": "Код",
+    "name": "Аты",
+    "lock": "Бөгеу",
+    "calc": "Төлем"
+  },
+  "data": {
+    "availableSystems": "Қол жетімді жүйелер",
+    "settings": "Параметрлер",
+    "dictionary": "Анықтамалар"
+  }
+}

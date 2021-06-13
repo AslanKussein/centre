@@ -1,0 +1,84 @@
+<!--<nav class="navbar navbar-expand-sm navbar-light bg-light" *ngIf="currentUser?.username">-->
+<nav class="navbar navbar-expand-sm navbar-light bg-light">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+            aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-lg-0 navbar-nav-scroll home-ul bs-scroll-height">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#/home"><i class="fa fa-home"></i></a>
+        </li>
+        <ul class="navbar-nav me-auto  my-lg-0 navbar-nav-scroll bs-scroll-height">
+          <li class="nav-item dropdown float-end">
+            <a class="nav-link dropdown-toggle" href="#" id="requirement" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false" translate>
+              header.requirement
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="requirement" style="left: -60px">
+              <li><a class="dropdown-item" href="#/calc" translate>header.demandCalculation</a></li>
+              <li><a class="dropdown-item" href="" translate>header.calculationPregnancy</a></li>
+              <li><a class="dropdown-item" href="" translate>header.newPeriod</a></li>
+              <li><a class="dropdown-item" href="#/payment-days" translate>header.paymentDays</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto my-lg-0 navbar-nav-scroll bs-scroll-height">
+          <li class="nav-item dropdown float-end">
+            <a class="nav-link dropdown-toggle" href="#" id="payments" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false" translate>
+              header.payments
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="payments" style="left: -60px">
+              <li><a class="dropdown-item" href="" translate>header.formationPayments</a></li>
+              <li><a class="dropdown-item" href="" translate>header.form7d</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto my-lg-0 navbar-nav-scroll bs-scroll-height">
+          <li class="nav-item dropdown float-end">
+            <a class="nav-link dropdown-toggle" href="#" id="reports" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false" translate>
+              header.reports
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="reports" style="left: -60px">
+<!--              <li><a class="dropdown-item" href="" translate>Смена пароля</a></li>-->
+<!--              <li><a class="dropdown-item" href="" translate>ГБД ФЛ</a></li>-->
+            </ul>
+          </li>
+        </ul>
+      </ul>
+      <form class="d-flex">
+        <ul class="navbar-nav me-auto my-lg-0 navbar-nav-scroll bs-scroll-height">
+          <li class="nav-item dropdown float-end">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdownLang" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              {{this.langValue}}
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdownLang">
+              <li><a class="dropdown-item" (click)="onChange($event)" [id]="i.code"
+                     *ngFor="let i of this.util.getLang()">{{i.value}}</a></li>
+            </ul>
+          </li>
+        </ul>
+        <ul class="navbar-nav me-auto my-lg-0 navbar-nav-scroll bs-scroll-height">
+          <li class="nav-item dropdown float-end">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button"
+               data-bs-toggle="dropdown" aria-expanded="false">
+              Центр
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style="left: -60px">
+              <li><a class="dropdown-item" href="" translate>header.changePass</a></li>
+              <li><a class="dropdown-item" href="" translate>header.fl</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li><a class="dropdown-item" (click)="logout()" translate>header.logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</nav>

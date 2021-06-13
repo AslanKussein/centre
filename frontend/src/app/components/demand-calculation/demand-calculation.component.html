@@ -1,0 +1,48 @@
+<section class="block">
+  <div class="card row">
+    <h5 class="title" translate>header.demandCalculation</h5>
+    <div class="col-sm-1"></div>
+    <div class="col-sm">
+      <div class="row my-1">
+        <div class="col-sm">
+          <div class="form-outline">
+            <input type="text" id="form1" class="form-control"/>
+            <label class="form-label" for="form1" translate>paymentDays.month</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          <table class="table  table-striped">
+            <thead>
+            <tr>
+              <th translate>demandCalc.code</th>
+              <th translate>demandCalc.name</th>
+              <th translate>demandCalc.lock</th>
+              <th translate>demandCalc.calc</th>
+            </tr>
+            </thead>
+            <tbody style="cursor: pointer">
+            <tr *ngFor="let node of data;let i = index">
+              <td>{{node.id}}</td>
+              <td>{{dicLang(node)}}</td>
+              <td>{{node.statusLock}}</td>
+              <td>{{node.statusCalc}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-1"></div>
+    <div class="card-footer row">
+      <div class="col-sm"></div>
+      <div class="col-sm-1">
+        <button class="btn btn-sm btn-primary ">Ok</button>
+      </div>
+      <div class="col-sm-1">
+        <button class="btn btn-sm btn-primary ">Cancel</button>
+      </div>
+    </div>
+  </div>
+</section>
