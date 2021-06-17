@@ -26,6 +26,9 @@ import {registerLocaleData} from "@angular/common";
 import {defineLocale, ruLocale} from "ngx-bootstrap/chronos";
 import localeRu from '@angular/common/locales/ru';
 import localeKz from '@angular/common/locales/ru-KZ';
+import {AngularTreeGridModule} from 'angular-tree-grid';
+import { Form7dComponent } from './components/form7d/form7d.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 registerLocaleData(localeRu, localeKz);
 defineLocale('ru', ruLocale);
@@ -51,6 +54,7 @@ export function HttpLoaderFactory(httpClient: any) {
     DemandCalculationComponent,
     HomeComponent,
     PaymentDaysComponent,
+    Form7dComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,6 +63,7 @@ export function HttpLoaderFactory(httpClient: any) {
     FormsModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    AngularTreeGridModule,
     ModalModule.forRoot(),
     NgxUiLoaderModule.forRoot(ngxUiLoaderConfig),
     ToastrModule.forRoot(),
@@ -71,6 +76,7 @@ export function HttpLoaderFactory(httpClient: any) {
         deps: [HttpClient]
       }
     }),
+    NgSelectModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

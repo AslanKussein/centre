@@ -9,11 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CalcResponseDto {
-    private String id;
-    private String parent;
-    private String name;
+public class DictionaryDto {
+    private Long id;
+    private String nameRu;
     private String nameKz;
-    private String statusLock;
-    private String statusCalc;
 }

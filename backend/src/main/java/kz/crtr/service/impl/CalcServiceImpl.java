@@ -32,7 +32,7 @@ public class CalcServiceImpl implements CalcService {
         paramMap.put("calculated", BundleMessageUtil.getLocaledValue(lang, "calculated"));
 
         String query = new StringJoiner(" ")
-                .add("Select a.rfrg_id id, '-1' idh, a.NAME, a.name_kz, null StatusLock, null StatusCalc")
+                .add("Select a.rfrg_id id, '0' parent, a.NAME, a.name_kz, null StatusLock, null StatusCalc")
                 .add("from rfrg_region a union all")
                 .add("Select r.RFBN_ID id, SubStr(r.RFBN_ID, 1, 2) idh, r.short_name name, r.SHORT_NAME_,")
                 .add("decode(b.statuslock, 0, :unlock, 1, :lock, b.statuslock) statuslock,")

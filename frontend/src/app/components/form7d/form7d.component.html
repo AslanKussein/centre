@@ -1,0 +1,54 @@
+<section class="block">
+  <div class="card row">
+    <h5 class="title" translate>Форма 7Д</h5>
+    <div class="card-body">
+      <form>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Месяц выплаты</label>
+          <div class="col-sm-6">
+            <input type="text"
+                   [bsConfig]="{maxDate: maxDate, isAnimated: true}"
+                   class="form-control" bsDatepicker
+                   #ru="bsDatepicker">
+          </div>
+        </div>
+        <!--        <div class="form-group row p-1">-->
+        <!--          <label for="inputPassword" class="col-sm-4 col-form-label">День выплаты</label>-->
+        <!--          <div class="col-sm-6">-->
+        <!--            <input type="text" class="form-control" id="inputPassword" placeholder="Password">-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Код банка</label>
+          <div class="col-sm-6">
+            <ng-select
+              [items]="paymentTypes"
+              placeholder="Код банка">
+            </ng-select>
+          </div>
+        </div>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Тип выплаты</label>
+          <div class="col-sm-6">
+            <ng-select
+              [items]="paymentTypes"
+              placeholder="Тип выплаты">
+            </ng-select>
+          </div>
+        </div>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Строк на листе</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
+          </div>
+        </div>
+        <div class="form-group row p-1">
+          <label for="inputPassword" class="col-sm-4 col-form-label">Маска файла</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" id="inputPassword" placeholder="Password">
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

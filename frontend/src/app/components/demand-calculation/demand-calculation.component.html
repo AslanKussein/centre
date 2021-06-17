@@ -2,56 +2,50 @@
   <div class="card row">
     <h5 class="title" translate>header.demandCalculation</h5>
     <div class="col-sm-1"></div>
-    <div class="col-sm">
-      <div class="row my-1">
-        <div class="col-sm">
-          <div class="form-outline">
-            <input type="text" id="form1" class="form-control"/>
-            <label class="form-label" for="form1" translate>paymentDays.month</label>
+    <div class="card-body">
+      <div class="col-sm">
+        <div class="row p-1">
+          <div class="col-sm">
+            <label translate>paymentDays.month</label>
+            <div class="row">
+              <div class="col-sm-3">
+                <input type="text" [(ngModel)]="payMonth"
+                       [bsConfig]="{dateInputFormat: 'MM.YYYY', maxDate: maxDate, isAnimated: true}"
+                       (onShown)="onOpenCalendar($event)" class="form-control" bsDatepicker
+                       #ru="bsDatepicker">
+              </div>
+              <div class="col-sm">
+                <button class="btn btn-sm btn-primary btn-200" [disabled]="this.selectedbranch==null" (click)="openModal(template);">Ok</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row p-1">
+          <div class="col-sm">
+            <db-angular-tree-grid #angularGrid
+                                  [data]="datax || []"
+                                  (cellclick)="selectCol($event)"
+                                  [configs]="configs">
+            </db-angular-tree-grid>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-sm">
-
-
-          <h2>Tree as Array of Nodes</h2>
-<!--          <treetable-->
-<!--            [tree]="arrayOfNodesTree">-->
-<!--          </treetable>-->
-
-
-
-          <table class="table  table-striped">
-            <thead>
-            <tr>
-              <th translate>demandCalc.code</th>
-              <th translate>demandCalc.name</th>
-              <th translate>demandCalc.lock</th>
-              <th translate>demandCalc.calc</th>
-            </tr>
-            </thead>
-            <tbody style="cursor: pointer">
-            <tr *ngFor="let node of data;let i = index">
-              <td>{{node.id}}</td>
-              <td>{{dicLang(node)}}</td>
-              <td>{{node.statusLock}}</td>
-              <td>{{node.statusCalc}}</td>
-            </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="card-footer row">
-      <div class="col-sm"></div>
-      <div class="col-sm-1">
-        <button class="btn btn-sm btn-primary ">Ok</button>
-      </div>
-      <div class="col-sm-1">
-        <button class="btn btn-sm btn-primary ">Cancel</button>
-      </div>
+      <div class="col-sm-1"></div>
     </div>
   </div>
 </section>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Вы действительно хотите выполнить расчёт потребности за {{formateDate}} по отделению {{selectedbranch}}?</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="modalRef.hide();">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>

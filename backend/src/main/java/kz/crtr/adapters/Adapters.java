@@ -1,6 +1,7 @@
 package kz.crtr.adapters;
 
 import kz.crtr.dto.CalcResponseDto;
+import kz.crtr.dto.DictionaryDto;
 import kz.crtr.dto.paymentdays.PaymentDaysResponseDto;
 import kz.crtr.util.PostgresMapResultScanner;
 import kz.crtr.util.StringUtils;
@@ -29,11 +30,21 @@ public class Adapters {
 
         return CalcResponseDto.builder()
                 .id(scanner.getString("id"))
-                .idh(scanner.getString("idh"))
+                .parent(scanner.getString("parent"))
                 .name(scanner.getString("name"))
                 .nameKz(scanner.getString("name_kz"))
                 .statusLock(scanner.getString("statuslock"))
                 .statusCalc(scanner.getString("statuscalc"))
+                .build();
+    }
+
+    public static DictionaryDto toDictionaryDto(Map<String, Object> map) {
+        PostgresMapResultScanner scanner = new PostgresMapResultScanner(map);
+
+        return DictionaryDto.builder()
+                .id(scanner.getLong("id"))
+                .nameRu(scanner.getString("NAMERU"))
+                .nameKz(scanner.getString("NAME_KZ"))
                 .build();
     }
 }

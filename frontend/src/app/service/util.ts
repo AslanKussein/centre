@@ -91,4 +91,28 @@ export class Util {
   keyPress(event: KeyboardEvent) {
     return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57
   }
+
+  toSelectArrayNewDic(data:any) {
+    let list: any = [];
+    if (data) {
+      const len = data.length;
+      for (let i = 0; i < len; i++) {
+        list.push({value: data[i]['id'], label: data[i][this.getDicNameByLanguage()]});
+      }
+    }
+    return list;
+  }
+
+  getDicNameByLanguage() {
+    let fieldName;
+    switch (this.getItem('lang')) {
+      case "kz":
+        fieldName = 'nameKz';
+        break;
+      default:
+        fieldName = 'nameRu';
+        break;
+    }
+    return fieldName;
+  }
 }
