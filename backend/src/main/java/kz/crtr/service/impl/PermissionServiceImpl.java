@@ -1,10 +1,16 @@
 package kz.crtr.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import kz.crtr.dto.auth.DecodeTokenDto;
+import kz.crtr.dto.auth.PublicKeyDto;
 import kz.crtr.dto.auth.TokenRequestDto;
 import kz.crtr.dto.auth.UserPrincipalDto;
 import kz.crtr.service.PermissionService;
 import kz.crtr.util.BooleanUtils;
+import kz.crtr.util.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,7 +19,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Set;
 
 import static java.util.Objects.nonNull;
 
@@ -25,60 +30,47 @@ public class PermissionServiceImpl implements PermissionService {
 
     @Value("${auth.host}")
     private String authorizationHost;
-    @Value("${auth.permissions}")
-    private String permissions;
-    @Value("${auth.roles}")
-    private String roles;
     @Value("${auth.valid}")
     private String valid;
+    @Value("${auth.publicKey}")
+    private String publicKey;
+
+    private final JwtTokenUtil tokenUtil;
 
     private static final String AUTHORIZATION = "Authorization";
     private static final String BEARER = "Bearer ";
-    private static final String BASIC = "Basic QUM6MQ==";
 
-    @Override
-    public UserPrincipalDto getAllPermissionList(HttpServletRequest request) {
-        String token = request.getHeader(AUTHORIZATION);
-        token = token.replace(BEARER, "");
-
-        final String uri = authorizationHost + permissions;
-
+    public PublicKeyDto getPublicKey(HttpServletRequest request) {
+        final String uri = authorizationHost + publicKey;
+        HttpHeaders headers = getHttpHeaders(request);
         RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<?> entity = new HttpEntity<>(headers);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set(AUTHORIZATION, BEARER.concat(token));
+        ResponseEntity<PublicKeyDto> responseEntity = restTemplate
+                .exchange(uri, HttpMethod.POST, entity, PublicKeyDto.class);
 
-//        HttpEntity<?> entity = new HttpEntity<>(headers);
-//        ResponseEntity<AuthorityResultDto> responseEntity = restTemplate
-//                .exchange(uri, HttpMethod.GET, entity, AuthorityResultDto.class);
-//        AuthorityResultDto body = responseEntity.getBody();
-//        assert nonNull(body);
-
-//        return insertSessionData(null, request);
-        return null;
+        return responseEntity.getBody();
     }
 
     @Override
-    public Set<String> getRoles(HttpServletRequest request) {
+    public UserPrincipalDto getDataFromToken(HttpServletRequest request) {
+        final ObjectMapper mapper = new ObjectMapper();
+        Claims claims = Jwts.parser().setSigningKey(getPublicKey(request).getKey()).parseClaimsJws(tokenUtil.getJwtFromRequest(request)).getBody();
+        DecodeTokenDto tokenDto = mapper.convertValue(claims, DecodeTokenDto.class);
+        return UserPrincipalDto.builder()
+                .empId(Long.parseLong(tokenDto.getJti()))
+                .username(tokenDto.getSub())
+                .active(Boolean.TRUE)
+                .build();
+    }
+
+    private HttpHeaders getHttpHeaders(HttpServletRequest request) {
         String token = request.getHeader(AUTHORIZATION);
         token = token.replace(BEARER, "");
-
-        final String uri = authorizationHost + roles;
-
-        RestTemplate restTemplate = new RestTemplate();
-
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.set(AUTHORIZATION, BEARER.concat(token));
-
-        HttpEntity<?> entity = new HttpEntity<>(headers);
-//        ResponseEntity<RolesDto> responseEntity = restTemplate
-//                .exchange(uri, HttpMethod.GET, entity, RolesDto.class);
-//        RolesDto body = responseEntity.getBody();
-//        assert nonNull(body);
-//        return body.getRoles();
-        return null;
+        return headers;
     }
 
 //    private UserPrincipalDto insertSessionData(AuthorityResultDto dto, HttpServletRequest request) {

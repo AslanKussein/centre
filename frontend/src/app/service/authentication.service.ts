@@ -44,9 +44,9 @@ export class AuthenticationService implements OnDestroy {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(token: string) {
+  validate(token: string) {
     this.options.headers.set('lang', <string>this.util.getItem('lang'));
-    this.subscriptions.add(this.loginIDP(token)
+    this.subscriptions.add(this.validateIDP(token)
       .pipe(first())
       .subscribe(
         param_ => {
@@ -66,13 +66,13 @@ export class AuthenticationService implements OnDestroy {
         }));
   }
 
-  private loginIDP(token: string) {
+  private validateIDP(token: string) {
     let headers = new HttpHeaders();
     headers = headers.set('Content-Type', 'application/json')
     headers = headers.set('lang', <string>this.util.getItem('lang'));
     headers = headers.set('Authorization', 'Bearer ' + token);
 
-    return this.http.post<any>(`${this.configService.authUrl}`, {}, {headers: headers}).pipe(map(user => {
+    return this.http.post<any>(`${this.configService.ssoUrl}`.concat('open-api/auth/validateToken'), {token: token}, {headers: headers}).pipe(map(user => {
       if (user && user.accessToken) {
         this.storeTokens(user);
         this.util.setItem('currentUser', JSON.stringify(user));

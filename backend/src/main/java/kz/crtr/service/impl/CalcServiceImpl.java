@@ -31,7 +31,6 @@ public class CalcServiceImpl implements CalcService {
         paramMap.put("notCalculated", BundleMessageUtil.getLocaledValue(lang, "not.calculated"));
         paramMap.put("calculated", BundleMessageUtil.getLocaledValue(lang, "calculated"));
 
-
         String query = new StringJoiner(" ")
                 .add("Select a.rfrg_id id, '-1' idh, a.NAME, a.name_kz, null StatusLock, null StatusCalc")
                 .add("from rfrg_region a union all")

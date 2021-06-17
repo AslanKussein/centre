@@ -32,7 +32,7 @@
             <tbody style="cursor: pointer; ">
             <tr *ngFor="let node of data;let i = index">
               <td>{{node.payMonthChar}}</td>
-              <td style="color: #00b2a8">{{node.payDay}}</td>
+              <td style="color: #00b2a8">{{node.payDayChar}}</td>
               <td>{{node.stageBegin}}</td>
               <td>{{node.stageEnd}}</td>
               <td>{{node.statusLockDecode}}</td>
@@ -43,11 +43,13 @@
                     paymentDays.action
                   </button>
                   <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" translate>paymentDays.actionF</a></li>
-                    <li><a class="dropdown-item" translate>paymentDays.newPayDay</a></li>
-                    <li><a class="dropdown-item" translate>paymentDays.dropPayDay</a></li>
-                    <li><a class="dropdown-item" translate>paymentDays.changeLevel</a></li>
-                    <li><a class="dropdown-item" translate>paymentDays.sendEnpf</a></li>
+                    <li><a class="dropdown-item" (click)="openModal(templateLock);editData(node)" translate>paymentDays.actionF</a></li>
+                    <li><a class="dropdown-item" (click)="openModal(templateNew);editData(node)" translate>paymentDays.newPayDay</a></li>
+                    <li><a class="dropdown-item" (click)="openModal(templateDelete);editData(node)" translate>paymentDays.dropPayDay</a></li>
+                    <li><a class="dropdown-item" (click)="openModal(templateChange);editData(node)" translate>paymentDays.changeLevel</a>
+                    </li>
+                    <li><a class="dropdown-item" (click)="openModal(template);editData(node)"
+                           translate>paymentDays.sendEnpf</a></li>
                   </ul>
                 </div>
               </td>
@@ -60,3 +62,114 @@
     <div class="col-sm-1"></div>
   </div>
 </section>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Утвердить и отправить график в ЕНПФ за {{edData?.payDayChar}}?</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="modalRef.hide(); sendGraphicToEnpf(edData?.payDay)">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>
+<ng-template #templateDelete>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Вы действительно хотите удалить день выплаты {{edData?.payDayChar}}?</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="modalRef.hide(); deletePayDay(edData?.payDay)">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>
+<ng-template #templateLock>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Вы действительно хотите полностью заблокировать выплаты {{edData?.payDayChar}}?</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="modalRef.hide(); lockUnlockPayDay(edData?.payDay)">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>
+<ng-template #templateChange>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Изменить этапы</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm">
+        <label class="col-sm col-form-label">Месяц выплаты<span class="text-danger">&nbsp;*</span></label>
+        <input type="text" [(ngModel)]="edData.payDayChoose"
+               [bsConfig]="{dateInputFormat: 'DD.MM.YYYY', maxDate: maxDate, isAnimated: true}"
+               class="form-control" bsDatepicker
+               #ru="bsDatepicker">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label class="col-sm col-form-label">Начальный этап</label>
+        <input class="col-sm form-control" type="number" oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               min="1" [(ngModel)]="edData.stageBegin" maxlength="2" (keypress)="util.keyPress($event)"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label class="col-sm col-form-label">Конечный этап</label>
+        <input class="col-sm form-control" type="number"  oninput="if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+               [(ngModel)]="edData.stageEnd"  maxlength="2" (keypress)="util.keyPress($event)"/>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="modalRef.hide();changeLevel(edData)">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>
+<ng-template #templateNew>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Новый день выплаты</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-sm">
+        <label class="col-sm col-form-label">Месяц выплаты<span class="text-danger">&nbsp;*</span></label>
+        <input type="text" [(ngModel)]="edData.payDayChoose"
+               [bsConfig]="{dateInputFormat: 'DD.MM.YYYY', maxDate: maxDate, isAnimated: true}"
+               class="form-control" bsDatepicker
+               #ru="bsDatepicker">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label class="col-sm col-form-label">Начальный этап</label>
+        <input class="col-sm form-control" type="number" [(ngModel)]="edData.stageBegin"/>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm">
+        <label class="col-sm col-form-label">Конечный этап</label>
+        <input class="col-sm form-control" type="number" [(ngModel)]="edData.stageEnd"/>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="modalRef.hide();addNewPayDay(edData)">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>

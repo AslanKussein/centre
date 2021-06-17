@@ -1,7 +1,7 @@
 package kz.crtr.adapters;
 
 import kz.crtr.dto.CalcResponseDto;
-import kz.crtr.dto.PaymentDaysResponseDto;
+import kz.crtr.dto.paymentdays.PaymentDaysResponseDto;
 import kz.crtr.util.PostgresMapResultScanner;
 import kz.crtr.util.StringUtils;
 
@@ -13,7 +13,8 @@ public class Adapters {
         PostgresMapResultScanner scanner = new PostgresMapResultScanner(map);
 
         return PaymentDaysResponseDto.builder()
-                .payDay(scanner.getString("pay_day"))
+                .payDay(scanner.getDate("pay_day"))
+                .payDayChar(scanner.getString("pay_dayChar"))
                 .payMonth(scanner.getZonedDateTime("pay_month"))
                 .payMonthChar(scanner.getString("pay_monthChar"))
                 .stageBegin(scanner.getString("stagebegin"))

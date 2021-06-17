@@ -1,8 +1,6 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from "./directives/auth.guard";
 import {DemandCalculationComponent} from "./components/demand-calculation/demand-calculation.component";
-import {AppComponent} from "./app.component";
 import {HomeComponent} from "./components/home/home.component";
 import {PaymentDaysComponent} from "./components/payment-days/payment-days.component";
 

@@ -1,12 +1,8 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {TranslateService} from '@ngx-translate/core';
 import {language} from "../environments/language";
 import {AuthenticationService} from "./service/authentication.service";
 import {User} from "./models/users";
-import {ActivatedRoute} from "@angular/router";
-import {Util} from "./service/util";
-import {ConfigService} from "./service/config.service";
-import {Subscription} from "rxjs";
 import {BsLocaleService} from "ngx-bootstrap/datepicker";
 
 @Component({

@@ -18,6 +18,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>16</java.version>
+        <spring-boot.run.jvmArguments>-Duser.timezone=Asia/Almaty</spring-boot.run.jvmArguments>
     </properties>
 
     <repositories>

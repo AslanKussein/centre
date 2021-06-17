@@ -50,7 +50,7 @@ export function HttpLoaderFactory(httpClient: any) {
     HeaderComponent,
     DemandCalculationComponent,
     HomeComponent,
-    PaymentDaysComponent
+    PaymentDaysComponent,
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       .subscribe(params => {
           if (!this.util.isNullOrEmpty(params)) {
             if (!this.util.isNullOrEmpty(params.access_token)) {
-              this.auth.login(params.access_token);
+              this.auth.validate(params.access_token);
             } else {
               // window.location.href = configService.ssoUrl
             }

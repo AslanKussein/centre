@@ -87,4 +87,8 @@ export class Util {
   nvl(val: any, val2: any) {
     return this.isNullOrEmpty(val) ? val2 : val;
   }
+
+  keyPress(event: KeyboardEvent) {
+    return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57
+  }
 }

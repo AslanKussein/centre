@@ -1,4 +1,4 @@
-package kz.crtr.dto;
+package kz.crtr.dto.paymentdays;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,12 +11,8 @@ import java.time.ZonedDateTime;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class PaymentDaysResponseDto {
-    private String payDay;
-    private ZonedDateTime payMonth;
-    private String payMonthChar;
+public class ChangeLevelResponse {
+    private ZonedDateTime payDay;
     private String stageBegin;
     private String stageEnd;
-    private String statusLockDecode;
-    private String statusLock;
 }
