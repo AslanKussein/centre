@@ -1,0 +1,44 @@
+<section class="block">
+  <div class="card row">
+    <h5 class="title" translate>header.calculationPregnancy</h5>
+    <div class="card-body">
+      <form>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Месяц выплаты</label>
+          <div class="col-sm-6">
+            <input type="text"
+                   [bsConfig]="{maxDate: maxDate, isAnimated: true}"
+                   class="form-control" bsDatepicker
+                   #ru="bsDatepicker">
+          </div>
+        </div>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Отделение</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control" maxlength="4"/>
+          </div>
+        </div>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Этап</label>
+          <div class="col-sm-6">
+            <input type="text" class="form-control"/>
+          </div>
+        </div>
+        <div class="form-group row p-1">
+          <label class="col-sm-4 col-form-label">Выплата</label>
+          <div class="col-sm-6">
+            <ng-select
+              placeholder="Выплата">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="form-group row p-1">
+          <div class="col-sm-6">
+            <button type="button" class="btn enter-btn text-white">Выполнить</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

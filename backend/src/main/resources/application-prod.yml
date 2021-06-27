@@ -23,6 +23,5 @@ spring.datasource:
   password: A123456a
 auth:
   host: http://172.16.17.86:8080/sso
-  permissions: /api/v1/ru/adm-core/my/permissions/
-  roles: /api/v1/ru/adm-core/my/roles/
   valid: /open-api/auth/validateToken
+  publicKey: /api/token/tokenKey

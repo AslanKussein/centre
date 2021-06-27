@@ -29,6 +29,8 @@ import localeKz from '@angular/common/locales/ru-KZ';
 import {AngularTreeGridModule} from 'angular-tree-grid';
 import { Form7dComponent } from './components/form7d/form7d.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { FormationPaymentsComponent } from './components/formation-payments/formation-payments.component';
+import { CalculationPregnancyComponent } from './components/calculation-pregnancy/calculation-pregnancy.component';
 
 registerLocaleData(localeRu, localeKz);
 defineLocale('ru', ruLocale);
@@ -55,6 +57,8 @@ export function HttpLoaderFactory(httpClient: any) {
     HomeComponent,
     PaymentDaysComponent,
     Form7dComponent,
+    FormationPaymentsComponent,
+    CalculationPregnancyComponent,
   ],
   imports: [
     BrowserModule,

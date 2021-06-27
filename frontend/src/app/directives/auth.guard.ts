@@ -3,6 +3,7 @@ import {Router, CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Activa
 import {ErrorInterceptor} from "./error.interceptor";
 import {Util} from "../service/util";
 import {AuthenticationService} from "../service/authentication.service";
+import {ConfigService} from "../service/config.service";
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
@@ -10,6 +11,7 @@ export class AuthGuard implements CanActivate {
   constructor(private router: Router,
               private util: Util,
               private activatedRoute: ActivatedRoute,
+              private configService: ConfigService,
               private errorInterceptor: ErrorInterceptor,
               private authenticationService: AuthenticationService) {
   }
@@ -19,9 +21,9 @@ export class AuthGuard implements CanActivate {
     if (currentUser) {
       return true
     } else {
-      if (!this.util.isNullOrEmpty(localStorage.chooseYourSoft)) {
+      if (this.util.isNullOrEmpty(this.util.getItem('JWT_TOKEN'))) {
         localStorage.clear();
-        this.router.navigate(['/login'])
+        window.location.href = this.configService.ssoUrl
         return;
       }
       if (localStorage.length == 0) {

@@ -1,0 +1,30 @@
+.block {
+  margin: 30px;
+  min-width: 505px;
+}
+
+.title {
+  margin: 10px;
+  font-weight: bold;
+}
+
+.btn-200 {
+  width: 100px;
+}
+.panel-header:active, .panel-header:focus, .nav-tabs .nav-link.active, .nav-item.show .nav-link, .badge:active {
+  border: 0;
+  border-bottom: 2px solid #00b2a8;
+}
+
+.bg-aqua {
+  background-color: #00b2a8;
+}
+
+.input-group-text {
+  background-color: transparent ;
+  border-left: none;
+}
+
+.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
+  border-right: white;
+}

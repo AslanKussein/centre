@@ -15,9 +15,9 @@ public class ParamMap<K, V> extends HashMap<K, V> {
         return v == null ? null : ((Integer) v);
     }
 
-    public void putIfNonNull(ParamMap<K, V> map, K key, V data) {
+    public void putIfNonNull(K key, V data) {
         if (nonNull(data) && data.toString().length() > 0) {
-            map.put(key, data);
+            this.put(key, data);
         }
     }
 
