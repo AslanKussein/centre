@@ -23,6 +23,6 @@ spring.datasource:
   username: solidary
   password: A123456a
 auth:
-  host: http://172.16.17.86:8080/sso
+  host: http://localhost:8080/sso
   valid: /open-api/auth/validateToken
   publicKey: /api/token/tokenKey

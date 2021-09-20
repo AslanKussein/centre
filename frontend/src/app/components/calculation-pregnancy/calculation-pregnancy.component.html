@@ -2,32 +2,35 @@
   <div class="card row">
     <h5 class="title" translate>header.calculationPregnancy</h5>
     <div class="card-body">
-      <form>
+      <form [formGroup]="pregnancyForm">
         <div class="form-group row p-1">
           <label class="col-sm-4 col-form-label">Месяц выплаты</label>
           <div class="col-sm-6">
             <input type="text"
-                   [bsConfig]="{maxDate: maxDate, isAnimated: true}"
-                   class="form-control" bsDatepicker
+                   [bsConfig]="{dateInputFormat: 'MM.YYYY', maxDate: maxDate, isAnimated: true}"
+                   class="form-control" bsDatepicker (onShown)="onOpenCalendar($event)" formControlName="dateTime"
                    #ru="bsDatepicker">
           </div>
         </div>
         <div class="form-group row p-1">
           <label class="col-sm-4 col-form-label">Отделение</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control" maxlength="4"/>
+            <input type="text" class="form-control" maxlength="4" formControlName="branch"/>
           </div>
         </div>
         <div class="form-group row p-1">
           <label class="col-sm-4 col-form-label">Этап</label>
           <div class="col-sm-6">
-            <input type="text" class="form-control"/>
+            <input type="text" class="form-control" formControlName="level"
+            />
           </div>
         </div>
         <div class="form-group row p-1">
           <label class="col-sm-4 col-form-label">Выплата</label>
           <div class="col-sm-6">
             <ng-select
+              [items]="pregnType"
+              formControlName="dicId"
               placeholder="Выплата">
             </ng-select>
           </div>
@@ -35,7 +38,7 @@
 
         <div class="form-group row p-1">
           <div class="col-sm-6">
-            <button type="button" class="btn enter-btn text-white">Выполнить</button>
+            <button type="button" class="btn enter-btn text-white" (click)="callProc()">Выполнить</button>
           </div>
         </div>
       </form>

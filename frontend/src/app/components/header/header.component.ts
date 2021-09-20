@@ -4,6 +4,7 @@ import {AuthenticationService} from "../../service/authentication.service";
 import {Util} from "../../service/util";
 import {TranslateService} from "@ngx-translate/core";
 import {Router} from "@angular/router";
+import {ReportsService} from "../../service/reports.service";
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,11 @@ export class HeaderComponent implements OnInit {
 
   currentUser!: User;
   langValue!: string;
+  repList!: any;
 
   constructor(private authenticationService: AuthenticationService,
               private translate: TranslateService,
-              private route: Router,
+              private reportsService: ReportsService,
               public util: Util) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
   }
@@ -25,12 +27,18 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.langValue = this.util.getLangValue();
     this.translate.use(<string>localStorage.getItem('lang'));
+
+    this.getAllReportList();
   }
 
   onChange(event: any) {
     this.util.setItem('lang', event.target.id);
     this.translate.use(event.target.id);
     this.langValue = this.util.getLangValue();
+  }
+
+  getAllReportList() {
+    this.reportsService.getAllReportList().subscribe(res => this.repList = res)
   }
 
   logout() {

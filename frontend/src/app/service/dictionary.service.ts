@@ -20,6 +20,13 @@ export class DictionaryService {
     );
   }
 
+  getRfspSinglePayments(): Observable<any> {
+    return this.http.get<any>(`${this.configService.apiUrl}/dic/getRfspSinglePayments`, {}).pipe(
+      tap(),
+      catchError(DictionaryService.handleError)
+    );
+  }
+
   private static handleError(error: HttpErrorResponse) {
     return throwError(
       error);

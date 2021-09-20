@@ -1,5 +1,4 @@
-<!--<nav class="navbar navbar-expand-sm navbar-light bg-light" *ngIf="currentUser?.username">-->
-<nav class="navbar navbar-expand-sm navbar-light bg-light">
+<nav class="navbar navbar-expand-sm navbar-light bg-light" *ngIf="currentUser?.username">
   <div class="container-fluid">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
             aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -16,7 +15,7 @@
                data-bs-toggle="dropdown" aria-expanded="false" translate>
               header.requirement
             </a>
-            <ul class="dropdown-menu" aria-labelledby="requirement" >
+            <ul class="dropdown-menu" aria-labelledby="requirement">
               <li><a class="dropdown-item" href="#/calc" translate>header.demandCalculation</a></li>
               <li><a class="dropdown-item" href="#/calculationPregnancy" translate>header.calculationPregnancy</a></li>
               <li><a class="dropdown-item" href="" translate>header.newPeriod</a></li>
@@ -30,7 +29,7 @@
                data-bs-toggle="dropdown" aria-expanded="false" translate>
               header.payments
             </a>
-            <ul class="dropdown-menu" aria-labelledby="payments" >
+            <ul class="dropdown-menu" aria-labelledby="payments">
               <li><a class="dropdown-item" href="#/formationPayments" translate>header.formationPayments</a></li>
               <li><a class="dropdown-item" href="#/form7" translate>header.form7d</a></li>
             </ul>
@@ -42,9 +41,17 @@
                data-bs-toggle="dropdown" aria-expanded="false" translate>
               header.reports
             </a>
-            <ul class="dropdown-menu" aria-labelledby="reports" >
-<!--              <li><a class="dropdown-item" href="" translate>Смена пароля</a></li>-->
-<!--              <li><a class="dropdown-item" href="" translate>ГБД ФЛ</a></li>-->
+            <ul class="dropdown-menu reports" aria-labelledby="reports">
+              <li *ngFor="let rep of repList">
+                <a class="dropdown-item" href="#">
+                  {{rep?.nameRu}} <i *ngIf="rep?.children?.length > 0" class="fa fa-arrow-right"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-submenu" *ngIf="rep?.children?.length > 0">
+                  <li>
+                    <a class="dropdown-item" href="#" *ngFor="let child of rep?.children">{{child?.nameRu}}</a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>
@@ -69,7 +76,7 @@
               Центр
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style="left: -60px">
-<!--              <li><a class="dropdown-item" href="" translate>header.changePass</a></li>-->
+              <!--              <li><a class="dropdown-item" href="" translate>header.changePass</a></li>-->
               <li><a class="dropdown-item" href="" translate>header.fl</a></li>
               <li>
                 <hr class="dropdown-divider">

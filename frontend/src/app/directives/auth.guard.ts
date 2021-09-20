@@ -23,11 +23,7 @@ export class AuthGuard implements CanActivate {
     } else {
       if (this.util.isNullOrEmpty(this.util.getItem('JWT_TOKEN'))) {
         localStorage.clear();
-        window.location.href = this.configService.ssoUrl
-        return;
-      }
-      if (localStorage.length == 0) {
-        this.router.navigate(['/login'])
+        // window.location.href = this.configService.ssoUrl
         return;
       }
       if (localStorage.getItem('action') != 'logout') {
