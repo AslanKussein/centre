@@ -31,6 +31,8 @@ import { Form7dComponent } from './components/form7d/form7d.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormationPaymentsComponent } from './components/formation-payments/formation-payments.component';
 import { CalculationPregnancyComponent } from './components/calculation-pregnancy/calculation-pregnancy.component';
+import { ReportComponent } from './components/report/report.component';
+import { TableOrderComponent } from './components/table-order/table-order.component';
 
 registerLocaleData(localeRu, localeKz);
 defineLocale('ru', ruLocale);
@@ -59,6 +61,8 @@ export function HttpLoaderFactory(httpClient: any) {
     Form7dComponent,
     FormationPaymentsComponent,
     CalculationPregnancyComponent,
+    ReportComponent,
+    TableOrderComponent,
   ],
   imports: [
     BrowserModule,

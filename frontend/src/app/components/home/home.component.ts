@@ -17,23 +17,18 @@ export class HomeComponent implements OnInit, OnDestroy {
               private util: Util,
               private auth: AuthenticationService,
               private configService: ConfigService) {
-    this.subscriptions.add(this.route.queryParams
-      .subscribe(params => {
-          if (!this.util.isNullOrEmpty(params)) {
-            if (!this.util.isNullOrEmpty(params.access_token)) {
-              this.auth.validate(params.access_token);
-            } else {
-              // window.location.href = configService.ssoUrl
-            }
-            if (!this.util.isNullOrEmpty(params.lang)) {
-              this.util.setItem('lang', params.lang);
-            }
-          }
-        }
-      ));
+
   }
 
   ngOnInit(): void {
+    console.log('********************************************')
+    this.route.queryParams.subscribe(params => {
+        console.log(params)
+
+        this.auth.validate(params['access_token']);
+        this.util.setItem('lang', params['lang']);
+      }
+    );
   }
 
   ngOnDestroy(): void {

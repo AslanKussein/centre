@@ -29,13 +29,12 @@ export class ErrorInterceptor implements HttpInterceptor {
     // @ts-ignore
     return next.handle(request).pipe(catchError(err => {
       this.ngxLoader.stop();
-      if (err.status === 401) {
-        if (this.util.isNullOrEmpty(this.util.getItem('refreshToken')) || this.util.isNullOrEmpty(this.util.getItem('JWT_TOKEN'))) {
-          localStorage.clear();
-          window.location.href = this.configService.ssoUrl
-          return;
+      if (err.status === 401 && !window.location.href.includes('login')) {
+        if (err.url.includes('refreshToken')) {
+          this.authenticationService.logout();
+        } else {
+          return this.handle401Error(request, next);
         }
-        return this.handle401Error(request, next);
       } else if (err.status === 400) {
         if (err.url.includes(this.configService.authUrl)) {
           if (err.error.error_description.includes('Refresh token expired')) {
@@ -100,14 +99,5 @@ export class ErrorInterceptor implements HttpInterceptor {
           return next.handle(request);
         }));
     }
-  }
-
-  showAuthModal() {
-    // this.modalService.show(LoginModalComponent, {
-    //   class: 'modal-md',
-    //   initialState: {
-    //     centered: true
-    //   }
-    // });
   }
 }

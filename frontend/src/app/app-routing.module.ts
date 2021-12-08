@@ -7,15 +7,19 @@ import {Form7dComponent} from "./components/form7d/form7d.component";
 import {AuthGuard} from "./directives/auth.guard";
 import {FormationPaymentsComponent} from "./components/formation-payments/formation-payments.component";
 import {CalculationPregnancyComponent} from "./components/calculation-pregnancy/calculation-pregnancy.component";
+import {ReportComponent} from "./components/report/report.component";
+import {TableOrderComponent} from "./components/table-order/table-order.component";
 
 const routes: Routes = [
   {path: '', redirectTo: '/home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
+  {path: 'home', component: HomeComponent},
   {path: 'calc', component: DemandCalculationComponent, canActivate: [AuthGuard]},
   {path: 'payment-days', component: PaymentDaysComponent, canActivate: [AuthGuard]},
   {path: 'form7', component: Form7dComponent, canActivate: [AuthGuard]},
   {path: 'formationPayments', component: FormationPaymentsComponent, canActivate: [AuthGuard]},
   {path: 'calculationPregnancy', component: CalculationPregnancyComponent, canActivate: [AuthGuard]},
+  {path: 'report', component: ReportComponent, canActivate: [AuthGuard]},
+  {path: 'order', component: TableOrderComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

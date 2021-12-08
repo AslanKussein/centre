@@ -15,17 +15,17 @@
                        #ru="bsDatepicker">
               </div>
               <div class="col-sm">
-                <button class="btn btn-sm btn-primary btn-200" [disabled]="this.selectedbranch==null" (click)="openModal(template);">Ok</button>
+                <button class="btn btn-sm btn-primary btn-200" [disabled]="this.selectedbranch==null"
+                        (click)="openModal(template);">Ok
+                </button>
               </div>
             </div>
           </div>
-
         </div>
-
         <div class="row p-1">
           <div class="col-sm">
             <db-angular-tree-grid #angularGrid
-                                  [data]="datax || []"
+                                  [data]="data || []"
                                   (cellclick)="selectCol($event)"
                                   [configs]="configs">
             </db-angular-tree-grid>
@@ -38,14 +38,15 @@
 </section>
 <ng-template #template>
   <div class="modal-header">
-    <h5 class="modal-title pull-left">Вы действительно хотите выполнить расчёт потребности за {{formateDate}} по отделению {{selectedbranch}}?</h5>
+    <h5 class="modal-title pull-left">Вы действительно хотите выполнить расчёт потребности за {{formateDate}} по
+      отделению {{selectedbranch}}?</h5>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-primary float-end" (click)="modalRef.hide();">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide();estimateNeed()">OK</button>
     <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
   </div>
 </ng-template>

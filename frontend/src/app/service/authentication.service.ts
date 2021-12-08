@@ -50,16 +50,16 @@ export class AuthenticationService implements OnDestroy {
       .pipe(first())
       .subscribe(
         param_ => {
-          // this.subscriptions.add(this.userService.findUserByLogin().subscribe(data => {
-          //   if (data != null) {
-          //     param_.fullName = data.fullName
-          //     param_.username = data.username
-          //     param_.empId = data.empId
-          //     param_.branch = data.branch
-          //     localStorage.setItem('currentUser', JSON.stringify(param_));
-          //     this.util.dnHref('/home')
-          //   }
-          // }));
+          this.subscriptions.add(this.userService.findUserByLogin().subscribe(data => {
+            if (data != null) {
+              param_.fullName = data.fullName
+              param_.username = data.username
+              param_.empId = data.empId
+              param_.branch = data.branch
+              localStorage.setItem('currentUser', JSON.stringify(param_));
+              this.util.dnHref('/home')
+            }
+          }));
         },
         res => {
           this.notifyService.showError('', res)
@@ -94,16 +94,16 @@ export class AuthenticationService implements OnDestroy {
   }
 
   logout() {
-    try {
-      this.subscriptions.add(this.signOut().pipe(first())
-        .subscribe()
-      )
-    } finally {
-      // @ts-ignore
-      this.currentUserSubject.next(null);
-      localStorage.clear();
-      window.location.href = this.configService.ssoUrl
-    }
+    // try {
+    //   this.subscriptions.add(this.signOut().pipe(first())
+    //     .subscribe()
+    //   )
+    // } finally {
+    //   // @ts-ignore
+    //   this.currentUserSubject.next(null);
+    //   localStorage.clear();
+    //   window.location.href = this.configService.ssoUrl
+    // }
   }
 
   signOut() {

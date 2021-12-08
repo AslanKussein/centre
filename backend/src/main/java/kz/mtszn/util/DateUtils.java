@@ -289,7 +289,7 @@ public class DateUtils {
         if (isNull(date)) {
             return null;
         }
-        return new java.sql.Date(Date.from(date.toInstant()).getTime());
+        return new java.sql.Date(Date.from(date.withZoneSameInstant(ZoneId.of("Asia/Almaty")).toInstant()).getTime());
     }
 
     public static java.sql.Date convertToSqlDate(Date date) {

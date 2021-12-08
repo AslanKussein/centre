@@ -42,13 +42,15 @@
               header.reports
             </a>
             <ul class="dropdown-menu reports" aria-labelledby="reports">
-              <li *ngFor="let rep of repList">
+              <li *ngFor="let rep of repList" style="font-size: 10px!important;">
                 <a class="dropdown-item" href="#">
                   {{rep?.nameRu}} <i *ngIf="rep?.children?.length > 0" class="fa fa-arrow-right"></i>
                 </a>
-                <ul class="dropdown-menu dropdown-submenu" *ngIf="rep?.children?.length > 0">
+                <ul class="dropdown-menu dropdown-submenu" *ngIf="rep?.children?.length > 0"
+                    style="font-size: 10px!important;">
                   <li>
-                    <a class="dropdown-item" href="#" *ngFor="let child of rep?.children">{{child?.nameRu}}</a>
+                    <a class="dropdown-item" (click)="getRepParam(child); openModal(template)"
+                       *ngFor="let child of rep?.children">{{child?.nameRu}}</a>
                   </li>
                 </ul>
               </li>
@@ -58,6 +60,12 @@
       </ul>
       <form class="d-flex">
         <ul class="navbar-nav me-auto my-lg-0 navbar-nav-scroll bs-scroll-height">
+          <li class="nav-item me-3 me-lg-0">
+            <a class="nav-link" href="#/order">
+              <i class="fa fa-file-excel-o fa-1x"></i>
+            </a>
+          </li>
+
           <li class="nav-item dropdown float-end">
             <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdownLang" role="button"
                data-bs-toggle="dropdown" aria-expanded="false">
@@ -89,3 +97,36 @@
     </div>
   </div>
 </nav>
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title pull-left">Параметры отчета</h5>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal" [formGroup]="appForm">
+      <div class="form-group" *ngFor="let data of repParList">
+        <label class="control-label col-sm-6" for="email">{{data.name}}</label>
+        <div class="col-sm-6">
+          <input type="text" *ngIf="data.tip == 'D'" class="form-control" bsDatepicker [formControlName]="data.formName"
+                 #ru="bsDatepicker">
+
+          <ng-select *ngIf="data.dic"
+                     [items]="data.dic"
+                     [formControlName]="data.formName"
+                     bindValue="id"
+                     bindLabel="nameRu">
+          </ng-select>
+
+          <input type="checkbox" *ngIf="data.tip == 'P'" [formControlName]="data.formName">
+        </div>
+      </div>
+
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-primary float-end" (click)="submit();modalRef.hide();">OK</button>
+    <button class="btn btn-primary float-end" (click)="modalRef.hide()">Отмена</button>
+  </div>
+</ng-template>

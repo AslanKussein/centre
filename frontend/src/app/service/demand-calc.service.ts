@@ -22,6 +22,18 @@ export class DemandCalcService {
       );
   }
 
+  public estimateNeed(time: any, data: any): Observable<any> {
+    return this.http.post(`${this.configService.apiUrl}/calc/estimateNeed`, {
+      time: time,
+      branchId: data
+    })
+      .pipe(
+        tap(data => {
+        }),
+        catchError(DemandCalcService.handleError)
+      );
+  }
+
   private static handleError(error: HttpErrorResponse) {
     if (error instanceof ErrorEvent) {
       console.error('An error occurred:', error);

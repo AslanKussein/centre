@@ -1,6 +1,7 @@
 package kz.mtszn.adapters;
 
 import kz.mtszn.dto.CalcResponseDto;
+import kz.mtszn.dto.DictDto;
 import kz.mtszn.dto.DictionaryDto;
 import kz.mtszn.dto.paymentdays.PaymentDaysResponseDto;
 import kz.mtszn.util.PostgresMapResultScanner;
@@ -45,6 +46,16 @@ public class Adapters {
                 .id(scanner.getLong("id"))
                 .code(scanner.getString("code"))
                 .nameRu(scanner.getString("NAMERU"))
+                .nameKz(scanner.getString("NAME_KZ"))
+                .build();
+    }
+
+    public static DictDto toDictDto(Map<String, Object> map) {
+        PostgresMapResultScanner scanner = new PostgresMapResultScanner(map);
+
+        return DictDto.builder()
+                .id(scanner.getString("id"))
+                .nameRu(scanner.getString("NAME_RU"))
                 .nameKz(scanner.getString("NAME_KZ"))
                 .build();
     }
